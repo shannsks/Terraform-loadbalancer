@@ -4,7 +4,7 @@ on: workflow-dispatch
 
 jobs: 
   terraform-job:  
-    runs-on: hulk
+    runs-on: rocket
     steps:
         - name: Checkout
           uses: actions/checkout@v5.0.0
