@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main 
-
+ 
 jobs: 
   terraform-job:  
     runs-on: shannu  # self-hosted runner label
