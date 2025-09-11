@@ -43,7 +43,7 @@ module "vir-machine" {
   image_sku            = "20_04_lts"
   image_version        = "latest"
   virtual_network_name = "sks-vnet"
-  frontend_subnet_name = "sks-datasubnet"
+  frontend_subnet_name = "sks-subnet"
 
 
 
