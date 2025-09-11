@@ -7,22 +7,23 @@ on:
 
 jobs: 
   terraform-job:  
-    runs-on: shannu  # Make sure your self-hosted runner is online and tagged correctly
+    runs-on: shannu  # self-hosted runner label
     environment: prod 
 
-
     steps: 
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v5.0.0
 
-      - name: Install unzip
-        run: sudo apt-get update && sudo apt-get install -y unzip
+      - name: Install unzip (required to extract Terraform)
+        run: sudo apt-get update && sudo apt-get install -y unzip curl
 
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.13.0
+      - name: Install Terraform manually
+        run: |
+          TERRAFORM_VERSION=1.13.0
+          curl -fsSL -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+          unzip terraform.zip
+          sudo mv terraform /usr/local/bin/
+          terraform -version
 
       - name: Terraform Init
         run: terraform init
@@ -48,12 +49,3 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
         working-directory: ./todoapp_infra
-
-     
-    
-
-
-      
-     
-    
-     
