@@ -9,7 +9,7 @@ module "resource_grp" {
 module "virtual_network" {
   depends_on               = [module.resource_grp]
   source                   = "../modules/azurerm_virtual_network"
-  virtual_network_name     = "sksvnet"
+  virtual_network_name     = "sks-vnet"
   virtual_network_location = "central US"
   resource_group_name      = "sks-ins"
   address_space            = ["10.0.0.0/16"]
