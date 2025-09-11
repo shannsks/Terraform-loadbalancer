@@ -1,19 +1,50 @@
-name: "shannu1st-wflow"
+name: "shannu-first-action"
 
-on : workflow_dispatch
+on:
+  push:
+    branches:
+      - main 
+
 jobs: 
-  terraform-job:
-    runs-on: shannu
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v5.0.0
-    - name: Install Terraform
-      uses: little-core-labs/install-terraform@v2.0.0
-      with:
-    # Version of terraform to download
-       version: 1.13.0
-          
-      
+    terraform-job:  
+        runs-on: shannu 
+        environment: prod 
+        steps: 
+            - name: Checkout
+              uses: actions/checkout@v5.0.0
+
+            - name: Install Terraform
+              uses: little-core-labs/install-terraform@v2.0.0
+              with:
+               version: 1.13.0
+
+        
+            - name: Terraform Init
+              run: terraform init
+              working-directory: ./todoapp_infra 
+        
+            - name: Terraform Fmt Check
+              run: terraform fmt
+              working-directory: ./todoapp_infra
+    
+            - name: Terraform Validate
+              run: terraform validate
+              working-directory: ./todoapp_infra
+
+            - name: Azure Login
+              uses: azure/login@v2
+              with:
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    
+            - name: Terraform Plan
+              run: terraform plan 
+              working-directory: ./todoapp_infra
+
+            - name: Terraform Apply
+              run: terraform apply -auto-approve
+              working-directory: ./todoapp_infra
+              
 
       
      
