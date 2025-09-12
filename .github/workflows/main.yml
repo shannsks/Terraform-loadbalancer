@@ -1,16 +1,20 @@
 name: "shannu-first-action"
 
 on:
-  push: 
+  push:
     branches:
-      - main 
- 
-jobs: 
-  terraform-job:  
-    runs-on: shannu  # self-hosted runner label
-    environment: prod 
+      - main
 
-    steps: 
+jobs:
+  terraform-job:
+    runs-on: shannu   # self-hosted runner label
+    environment: prod
+
+    permissions:
+      id-token: write   # required for OIDC
+      contents: read    # required to checkout code
+
+    steps:
       - name: Checkout Code
         uses: actions/checkout@v5.0.0
 
@@ -27,8 +31,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./todoapp_infra 
-        
+        working-directory: ./todoapp_infra
+
       - name: Terraform Fmt Check
         run: terraform fmt
         working-directory: ./todoapp_infra
@@ -41,13 +45,15 @@ jobs:
         run: |
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-      - name: Azure Login
+      - name: Azure Login (Federated Identity)
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Plan
-        run: terraform plan 
+        run: terraform plan
         working-directory: ./todoapp_infra
 
       - name: Terraform Apply
