@@ -30,7 +30,7 @@ jobs:
       - name: Install Azure CLI
         run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-      - name: Azure Login (OIDC)
+      - name: Azure Login (OIDC) 
         uses: azure/login@v2
         with:
           client-id: 21cf03ac-6297-41a8-9ba2-77d69ac33150
