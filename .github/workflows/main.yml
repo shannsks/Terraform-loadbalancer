@@ -11,8 +11,8 @@ jobs:
     environment: prod
 
     permissions:
-      id-token: write   # required for OIDC
-      contents: read    # required to checkout code
+      id-token: write   # OIDC token ke liye required
+      contents: read    # checkout ke liye required
 
     steps:
       - name: Checkout Code
@@ -48,11 +48,11 @@ jobs:
       - name: Azure Login (Federated Identity)
         uses: azure/login@v2
         with:
-          client-id: ${{ env.AZURE_CLIENT_ID }}
-          tenant-id: ${{ env.AZURE_TENANT_ID }}
-          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: terraform Plan
+      - name: Terraform Plan
         run: terraform plan
         working-directory: ./todoapp_infra
 
