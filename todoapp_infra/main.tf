@@ -40,7 +40,7 @@ module "vir-machine" {
   admin_password       = "Welcome@2025"
   image_publisher      = "Canonical"
   image_offer          = "0001-com-ubuntu-server-focal"
-  image_sku            = "20_04_lts"
+  image_sku            = "22_04_lts"
   image_version        = "latest"
   virtual_network_name = "sks-vnet"
   frontend_subnet_name = "sks-subnet"
