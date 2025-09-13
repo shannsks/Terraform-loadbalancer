@@ -1,9 +1,9 @@
-name: "shannu-first-action"
+name: "shannu-1st-WF"
 
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   terraform-job:
