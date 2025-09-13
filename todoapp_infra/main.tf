@@ -38,10 +38,11 @@ module "vir-machine" {
   vm_size              = "Standard_B1s"
   admin_username       = "sksadmin"
   admin_password       = "Welcome@2025"
-  image_publisher      = "Canonical"
-  image_offer          = "UbuntuServer"
-  image_sku            = "22_04-lts"
-  image_version        = "latest"
+  image_publisher = "Canonical"
+  image_offer     = "UbuntuServer"
+  image_sku       = "22_04-lts"
+  image_version   = "22.04.202407020"   # Replace with actual version shown
+
   virtual_network_name = "sks-vnet"
   frontend_subnet_name = "sks-subnet"
 
