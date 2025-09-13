@@ -32,7 +32,7 @@ module "vir-machine" {
   depends_on           = [module.resource_grp, module.subnet, module.virtual_network]
   source               = "../modules/azurerm_virtual_machine"
   nic_name             = "sks-nic"
-  location             = "central us"
+  location             = "centralindia"
   resource_group_name  = "sks-ins"
   vm_name              = "sks-vm"
   vm_size              = "Standard_B1s"
@@ -40,7 +40,7 @@ module "vir-machine" {
   admin_password       = "Welcome@2025"
   image_publisher      = "Canonical"
   image_offer          = "UbuntuServer"
-  image_sku            = "22_04-lts-gen2"
+  image_sku            = "24_04-lts-gen2"
   image_version        = "latest"
   virtual_network_name = "sks-vnet"
   frontend_subnet_name = "sks-subnet"
