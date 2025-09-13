@@ -40,10 +40,11 @@ module "vir-machine" {
   admin_password       = "Welcome@2025"
   image_publisher      = "Canonical"
   image_offer          = "UbuntuServer"
-  image_sku            = "24_04-lts-gen2"
+  image_sku            = "22_04-lts"
   image_version        = "latest"
   virtual_network_name = "sks-vnet"
   frontend_subnet_name = "sks-subnet"
+
 
 
 
