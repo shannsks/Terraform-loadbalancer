@@ -1,7 +1,7 @@
 module "resource_grp" {
   source                  = "../modules/Azurerm_resource_group"
   resource_group_name     = "sks-ins"
-  resource_group_location = "central US"
+  resource_group_location = "uksouth"
 
 
 }
@@ -10,7 +10,7 @@ module "virtual_network" {
   depends_on               = [module.resource_grp]
   source                   = "../modules/azurerm_virtual_network"
   virtual_network_name     = "sks-vnet"
-  virtual_network_location = "central US"
+  virtual_network_location = "uksouth"
   resource_group_name      = "sks-ins"
   address_space            = ["10.0.0.0/16"]
 
@@ -32,7 +32,7 @@ module "vir-machine" {
   depends_on           = [module.resource_grp, module.subnet, module.virtual_network]
   source               = "../modules/azurerm_virtual_machine"
   nic_name             = "sks-nic"
-  location             = "centralindia"
+  location             = "uksouth"
   resource_group_name  = "sks-ins"
   vm_name              = "sks-vm"
   vm_size              = "Standard_B1s"
